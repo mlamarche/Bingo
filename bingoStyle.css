@@ -1,0 +1,60 @@
+body{
+	width:100%;
+	padding:20px;
+}
+#Opponent{
+	background-color:blue;
+	height:500px;
+	left:0;
+	border-right: 1px solid #eee;
+	padding:45px;
+}
+#guessBar{
+	background-color:gold;
+	right:0;
+	border-left: 1px solid #eee;
+}
+#board{
+	height:500px;
+	width:500px;
+	left:10%;
+}
+
+#header{
+	height:100px;
+	width:100%;
+	font-size:48px;
+	text-align: center;
+}
+#head{
+	border: 5px solid blue;
+}
+.miniMe{
+	height:30px;
+	width:12px;
+	border:1px solid black;
+}
+.square{
+	height:100px;
+	width: 100px;
+	border: 5px solid black;
+	font-size:72px;
+	text-align:center;
+	vertical-align: center;
+}
+.buttonHolder{
+	height:100px;
+	width: 100px;
+	text-align:center;
+	vertical-align: center;
+}
+
+button{
+	position:relative;
+	top:20px;
+	margin:auto;
+	opacity: 1;
+}
+#N3,#N8,#miniM,#mini13{
+	background-color:red;
+}
