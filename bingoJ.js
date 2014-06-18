@@ -141,6 +141,21 @@ function displayHead(num) {
         console.log("i dont even know...");
     }
 }
+
+function displayGuess() {
+    $('#B').html("B " + B1.sort(function(a, b) {
+        return a - b
+    }));
+    $('#I').html("I " + I1.sort());
+    $('#N').html("N " + N1.sort());
+    $('#G').html("G " + G1.sort());
+    $('#O').html("O " + O1.sort());
+    $('#BR').html("B " + BR);
+    $('#IR').html("I " + IR);
+    $('#NR').html("N " + NR);
+    $('#GR').html("G " + GR);
+    $('#OR').html("O " + OR);
+}
 /*Used to show which numbers have been guessed
 takes in a position array and a corresponding boolean array*/
 function turnRed(array, array2) {
@@ -219,7 +234,6 @@ function isWin(winArray, wins) {
     }
     if (win === true) {
         winner = wins;
-        console.log("I dont like this");
     }
 }
 /*Resets the boards and begins anew*/
@@ -264,10 +278,24 @@ function resetGame() {
     OR = [61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75];
     genBoard(myBoard, all);
     genBoard(myBoard2, all2);
+    console.log("I should not say this more than once");
+    /*problem, my program does not want to leave the resetGame function once it has entered it*/
+}
+
+function done() {
+    $('button').html("Again?");
+    $('#header').html(winner + " is the winner");
+    console.log("before the click part");
+    $('button').click(function() {
+        resetGame();
+        console.log("inside the function done()");
+    });
 }
 $(document).ready(function() {
     genBoard(myBoard, all);
     genBoard(myBoard2, all2);
+
+    console.log("HI");
     $('button').click(function() {
         if (win === false) {
             rand = Math.random();
@@ -282,18 +310,7 @@ $(document).ready(function() {
             guessList[guessCount] = num;
             guessCount++;
             displayHead(num);
-            $('#B').html("B " + B1.sort(function(a, b) {
-                return a - b
-            }));
-            $('#I').html("I " + I1.sort());
-            $('#N').html("N " + N1.sort());
-            $('#G').html("G " + G1.sort());
-            $('#O').html("O " + O1.sort());
-            $('#BR').html("B " + BR);
-            $('#IR').html("I " + IR);
-            $('#NR').html("N " + NR);
-            $('#GR').html("G " + GR);
-            $('#OR').html("O " + OR);
+            displayGuess();
             toTrue(allBool, all);
             toTrue(allBool2, all2);
 
@@ -306,15 +323,9 @@ $(document).ready(function() {
             if (win === false) {
                 isWin(allBool2, "Player 2");
             }
-        }
-        console.log("why");
-        if (win === true) {
-            $('button').html("Again?");
-            $('#header').html(winner + " is the winner");
-            $('button').click(function() {
-                resetGame();
-                console.log("this is a " + win);
-            })
+        } else if (win === true) {
+            done();
         }
     });
+    /*problem for tomorrow, I still enter the reset function even when the variable should not allow me to*/
 });
