@@ -261,7 +261,7 @@ function resetGame() {
     N1 = [];
     O1 = [];
     winner = 0;
-    $('#header').html("Ready to start a new game");
+    $('#header').html("Ready to start again");
     $('#miniHeader').html("Players");
     BR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     IR = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
