@@ -15,193 +15,168 @@
 		<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css'/>
 		<!-- Local includes -->
 		<script src="bingoJ.js" type="text/javascript"></script>
+		<script type="text/javascript" src="ich.js"></script>
 		<link type="text/css" rel="stylesheet" href="bingoStyle.css"/>
 	</head>
 	<body>
-		<div class="row" id = "screen">
-			<div class="col-md-2 col-md-push-2" id="Opponent">
-				<h1>Player 1 </h1>
-				<div class="row">
-					<div class="col-sm-4 miniMe"id ="mini1"></div>
-					<div class="col-sm-4 miniMe"id ="mini2"></div>
-					<div class="col-sm-4 miniMe"id ="mini3"></div>
-					<div class="col-sm-4 miniMe"id ="mini4"></div>
-					<div class="col-sm-4 miniMe"id ="mini5"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 miniMe"id ="mini6"></div>
-					<div class="col-sm-4 miniMe"id ="mini7"></div>
-					<div class="col-sm-4 miniMe"id ="mini8"></div>
-					<div class="col-sm-4 miniMe"id ="mini9"></div>
-					<div class="col-sm-4 miniMe"id ="mini10"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 miniMe"id ="mini11"></div>
-					<div class="col-sm-4 miniMe"id ="mini12"></div>
-					<div class="col-sm-4 miniMe"id ="mini13"></div>
-					<div class="col-sm-4 miniMe"id ="mini14"></div>
-					<div class="col-sm-4 miniMe"id ="mini15"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 miniMe"id ="mini16"></div>
-					<div class="col-sm-4 miniMe"id ="mini17"></div>
-					<div class="col-sm-4 miniMe"id ="mini18"></div>
-					<div class="col-sm-4 miniMe"id ="mini19"></div>
-					<div class="col-sm-4 miniMe"id ="mini20"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 miniMe"id ="mini21"></div>
-					<div class="col-sm-4 miniMe"id ="mini22"></div>
-					<div class="col-sm-4 miniMe"id ="mini23"></div>
-					<div class="col-sm-4 miniMe"id ="mini24"></div>
-					<div class="col-sm-4 miniMe"id ="mini25"></div>
-				</div>
-				<h1>Player 2 </h1>
-				<div class="row">
-					<div class="col-sm-4 miniMe"id ="miniA"></div>
-					<div class="col-sm-4 miniMe"id ="miniB"></div>
-					<div class="col-sm-4 miniMe"id ="miniC"></div>
-					<div class="col-sm-4 miniMe"id ="miniD"></div>
-					<div class="col-sm-4 miniMe"id ="miniE"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 miniMe"id ="miniF"></div>
-					<div class="col-sm-4 miniMe"id ="miniG"></div>
-					<div class="col-sm-4 miniMe"id ="miniH"></div>
-					<div class="col-sm-4 miniMe"id ="miniI"></div>
-					<div class="col-sm-4 miniMe"id ="miniJ"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 miniMe"id ="miniK"></div>
-					<div class="col-sm-4 miniMe"id ="miniL"></div>
-					<div class="col-sm-4 miniMe"id ="miniM"></div>
-					<div class="col-sm-4 miniMe"id ="miniN"></div>
-					<div class="col-sm-4 miniMe"id ="miniO"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 miniMe"id ="miniP"></div>
-					<div class="col-sm-4 miniMe"id ="miniQ"></div>
-					<div class="col-sm-4 miniMe"id ="miniR"></div>
-					<div class="col-sm-4 miniMe"id ="miniS"></div>
-					<div class="col-sm-4 miniMe"id ="miniT"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 miniMe"id ="miniU"></div>
-					<div class="col-sm-4 miniMe"id ="miniV"></div>
-					<div class="col-sm-4 miniMe"id ="miniW"></div>
-					<div class="col-sm-4 miniMe"id ="miniX"></div>
-					<div class="col-sm-4 miniMe"id ="miniY"></div>
-				</div>
-			</div>
-			<div class ="col-md-6 col md-pull-6" id="board">
-				<div id="header"> Player 1</div>
-				<div class="row">
-					<div class="col-sm-4 square" id="head">B</div>
-					<div class="col-sm-4 square" id="head">I</div>
-					<div class="col-sm-4 square" id="head">N</div>
-					<div class="col-sm-4 square" id="head">G</div>
-					<div class="col-sm-4 square" id="head">O</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 square" id="B1"></div>
-					<div class="col-sm-4 square" id="I1"></div>
-					<div class="col-sm-4 square" id="N1"></div>
-					<div class="col-sm-4 square" id="G1"></div>
-					<div class="col-sm-4 square" id="O1"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 square" id="B2"></div>
-					<div class="col-sm-4 square" id="I2"></div>
-					<div class="col-sm-4 square" id="N2"></div>
-					<div class="col-sm-4 square" id="G2"></div>
-					<div class="col-sm-4 square" id="O2"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 square" id="B3"></div>
-					<div class="col-sm-4 square" id="I3"></div>
-					<div class="col-sm-4 square" id="N3"><span class="glyphicon glyphicon-star-empty"></span></div>
-					<div class="col-sm-4 square" id="G3"></div>
-					<div class="col-sm-4 square" id="O3"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 square" id="B4"></div>
-					<div class="col-sm-4 square" id="I4"></div>
-					<div class="col-sm-4 square" id="N4"></div>
-					<div class="col-sm-4 square" id="G4"></div>
-					<div class="col-sm-4 square" id="O4"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 square" id="B5"></div>
-					<div class="col-sm-4 square" id="I5"></div>
-					<div class="col-sm-4 square" id="N5"></div>
-					<div class="col-sm-4 square" id="G5"></div>
-					<div class="col-sm-4 square" id="O5"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 buttonHolder" ></div>
-					<div class="col-sm-4 buttonHolder">
-						<button type="button" id='#reset'>Next</button>
+		<div class="container-fluid" id="cont">
+			<div class="row" id = "screen">
+				<div class="col-md-2 " id="Opponent">
+				<div id="miniHeader">
+					Players
 					</div>
-					<div class="col-sm-4 buttonHolder"></div>
+					<div id="Opponents">
+
+					</div>
 				</div>
-				<div id="header"> Player 2</div>
-				<div class="row">
-					<div class="col-sm-4 square" id="head">B</div>
-					<div class="col-sm-4 square" id="head">I</div>
-					<div class="col-sm-4 square" id="head">N</div>
-					<div class="col-sm-4 square" id="head">G</div>
-					<div class="col-sm-4 square" id="head">O</div>
+				<div class ="col-md-5 col " id="board">
+					<div id="header">
+					Board
+					</div>
+					<div id="boards">
+
+					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-4 square" id="B6"></div>
-					<div class="col-sm-4 square" id="I6"></div>
-					<div class="col-sm-4 square" id="N6"></div>
-					<div class="col-sm-4 square" id="G6"></div>
-					<div class="col-sm-4 square" id="O6"></div>
+				<div class="container-fluid" id="RightSide">
+					<div class="row" id="firsty">
+						<div class = "col-md-2 " id="buttonBar">
+						<h1>BUTTONS!</h1>
+							<div class="row">
+							<div class="col-sm-4 buttonHolder">
+								<button type="button" class="btn btn-lg btn-success next"id='#next'>Begin</button>
+							</div>
+							</div>
+							<div class="row">
+							<div class="col-sm-4 buttonHolder">
+								<button type="button" class="btn btn-lg btn-warning again"id='#reset'>Play again?</button>
+							</div>
+							</div>
+							<div class="row">
+							<div class="col-sm-4 buttonHolder">
+								<button type="button" class="btn btn-lg btn-danger new"id='#new'>New Player</button>
+							</div>
+							</div>
+						</div>
+						<div class = "col-md-3 " id="guessBar">
+							<h1>Guesses Remaining</h1>
+							<div id="BR">B</div>
+							<div id="IR">I</div>
+							<div id="NR">N</div>
+							<div id="GR">G</div>
+							<div id="OR">O</div>
+							<h1>Guesses Gone By</h1>
+							<div id="B">B</div>
+							<div id="I">I</div>
+							<div id="N">N</div>
+							<div id="G">G</div>
+							<div id="O">O</div>
+						</div>
+					</div>
+					<div class="row" id="secondy">
+						<div id="leader">
+							<div id="leaderHead">
+								<h1>Leaders</h1>
+							</div>
+							<div id="leaders">
+								
+							</div>
+						</div>
+						
+					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-4 square" id="B7"></div>
-					<div class="col-sm-4 square" id="I7"></div>
-					<div class="col-sm-4 square" id="N7"></div>
-					<div class="col-sm-4 square" id="G7"></div>
-					<div class="col-sm-4 square" id="O7"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 square" id="B8"></div>
-					<div class="col-sm-4 square" id="I8"></div>
-					<div class="col-sm-4 square" id="N8"><span class="glyphicon glyphicon-star-empty"></span></div>
-					<div class="col-sm-4 square" id="G8"></div>
-					<div class="col-sm-4 square" id="O8"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 square" id="B9"></div>
-					<div class="col-sm-4 square" id="I9"></div>
-					<div class="col-sm-4 square" id="N9"></div>
-					<div class="col-sm-4 square" id="G9"></div>
-					<div class="col-sm-4 square" id="O9"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 square" id="B10"></div>
-					<div class="col-sm-4 square" id="I10"></div>
-					<div class="col-sm-4 square" id="N10"></div>
-					<div class="col-sm-4 square" id="G10"></div>
-					<div class="col-sm-4 square" id="O10"></div>
-				</div>
-			</div>
-			<div class = "col-md-3 col-md-push-3" id="guessBar">
-				<h1>Guesses Remaining</h1>
-				<div id="BR">B</div>
-				<div id="IR">I</div>
-				<div id="NR">N</div>
-				<div id="GR">G</div>
-				<div id="OR">O</div>
-				<h1>Guesses Gone By</h1>
-				<div id="B">B</div>
-				<div id="I">I</div>
-				<div id="N">N</div>
-				<div id="G">G</div>
-				<div id="O">O</div>
 			</div>
 		</div>
+		<script id="user" type="text/html">
+			
+				<h1 class="name">{{ playerName }}</h1>
+				<div class="row">
+					<div class="col-sm-4 miniMe"id ="mini1_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini2_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini3_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini4_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini5_{{playerID}}"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 miniMe"id ="mini6_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini7_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini8_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini9_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini10_{{playerID}}"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 miniMe"id ="mini11_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini12_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe middle"id ="mini13_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini14_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini15_{{playerID}}"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 miniMe"id ="mini16_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini17_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini18_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini19_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini20_{{playerID}}"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 miniMe"id ="mini21_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini22_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini23_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini24_{{playerID}}"></div>
+					<div class="col-sm-4 miniMe"id ="mini25_{{playerID}}"></div>
+				</div>
+			
+		</script>
+		<script id="userBoard" type="text/html">
+			
+				<h1 class="name">{{ playerName }}</h1>
+				<div class="row">
+					<div class="col-sm-4 square" id="head">B</div>
+					<div class="col-sm-4 square" id="head">I</div>
+					<div class="col-sm-4 square" id="head">N</div>
+					<div class="col-sm-4 square" id="head">G</div>
+					<div class="col-sm-4 square" id="head">O</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 square" id="B1_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="I1_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="N1_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="G1_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="O1_{{playerID}}"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 square" id="B2_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="I2_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="N2_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="G2_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="O2_{{playerID}}"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 square" id="B3_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="I3_{{playerID}}"></div>
+					<div class="col-sm-4 square middle" id="N3_{{playerID}}"><span class="glyphicon glyphicon-star-empty"></span></div>
+					<div class="col-sm-4 square" id="G3_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="O3_{{playerID}}"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 square" id="B4_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="I4_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="N4_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="G4_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="O4_{{playerID}}"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 square" id="B5_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="I5_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="N5_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="G5_{{playerID}}"></div>
+					<div class="col-sm-4 square" id="O5_{{playerID}}"></div>
+				</div>
+			
+		</script>
+		<script id="leaderBoard" type="text/html">
+				<div class="row">
+					<div class="col-sm-4 line" id="leader_{{playerID}}">"{{playerName}}"</div>
+				</div>
+		</script>
 	</body>
 </html>

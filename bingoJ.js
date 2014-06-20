@@ -1,7 +1,11 @@
 var win = false;
+var start = true;
 var rand = 0;
 var num = 0;
 var winner = 0;
+var winCount = 0;
+var playerArray = [];
+var leaders = [];
 var B1 = [];
 var I1 = [];
 var G1 = [];
@@ -12,87 +16,89 @@ var IR = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
 var NR = [31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
 var GR = [46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60];
 var OR = [61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75];
-var all = [];
-var all2 = [];
 var guessList = [];
 var guessCount = 0;
-var guess = 0;
-var myBoard = ['#B1', '#B2', '#B3', '#B4', '#B5',
-    '#I1', '#I2', '#I3', '#I4', '#I5',
-    '#N1', '#N2', '#N3', '#N4', '#N5',
-    '#G1', '#G2', '#G3', '#G4', '#G5',
-    '#O1', '#O2', '#O3', '#O4', '#O5',
-];
-var myBoard2 = ['#B6', '#B7', '#B8', '#B9', '#B10',
-    '#I6', '#I7', '#I8', '#I9', '#I10',
-    '#N6', '#N7', '#N8', '#N9', '#N10',
-    '#G6', '#G7', '#G8', '#G9', '#G10',
-    '#O6', '#O7', '#O8', '#O9', '#O10',
-];
-var miniArray = ['#mini1', '#mini6', '#mini11', '#mini16', '#mini21',
-    '#mini2', '#mini7', '#mini12', '#mini17', '#mini22',
-    '#mini3', '#mini8', '#mini13', '#mini18', '#mini23',
-    '#mini4', '#mini9', '#mini14', '#mini19', '#mini24',
-    '#mini5', '#mini10', '#mini15', '#mini20', '#mini25'
-];
-var miniArray2 = ['#miniA', '#miniF', '#miniK', '#miniP', '#miniU',
-    '#miniB', '#miniG', '#miniL', '#miniQ', '#miniV',
-    '#miniC', '#miniH', '#miniM', '#miniR', '#miniW',
-    '#miniD', '#miniI', '#miniN', '#miniS', '#miniX',
-    '#miniE', '#miniJ', '#miniO', '#miniT', '#miniY'
-];
-var allBool = [false, false, false, false, false,
-    false, false, false, false, false,
-    false, false, true, false, false,
-    false, false, false, false, false,
-    false, false, false, false, false
-];
-var allBool2 = [false, false, false, false, false,
-    false, false, false, false, false,
-    false, false, true, false, false,
-    false, false, false, false, false,
-    false, false, false, false, false
-];
+
+function newPlayer() {
+    var newName = prompt("What is your player name?");
+    var playerIDs = playerArray.length;
+    var player = {
+        playerName: newName,
+        playerID: playerIDs,
+        playerBoard: ['#B1_' + playerIDs, '#B2_' + playerIDs, '#B3_' + playerIDs, '#B4_' + playerIDs, '#B5_' + playerIDs,
+            '#I1_' + playerIDs, '#I2_' + playerIDs, '#I3_' + playerIDs, '#I4_' + playerIDs, '#I5_' + playerIDs,
+            '#N1_' + playerIDs, '#N2_' + playerIDs, '#N3_' + playerIDs, '#N4_' + playerIDs, '#N5_' + playerIDs,
+            '#G1_' + playerIDs, '#G2_' + playerIDs, '#G3_' + playerIDs, '#G4_' + playerIDs, '#G5_' + playerIDs,
+            '#O1_' + playerIDs, '#O2_' + playerIDs, '#O3_' + playerIDs, '#O4_' + playerIDs, '#O5_' + playerIDs,
+        ],
+        playerMini: ['#mini1_' + playerIDs, '#mini6_' + playerIDs, '#mini11_' + playerIDs, '#mini16_' + playerIDs, '#mini21_' + playerIDs,
+            '#mini2_' + playerIDs, '#mini7_' + playerIDs, '#mini12_' + playerIDs, '#mini17_' + playerIDs, '#mini22_' + playerIDs,
+            '#mini3_' + playerIDs, '#mini8_' + playerIDs, '#mini13_' + playerIDs, '#mini18_' + playerIDs, '#mini23_' + playerIDs,
+            '#mini4_' + playerIDs, '#mini9_' + playerIDs, '#mini14_' + playerIDs, '#mini19_' + playerIDs, '#mini24_' + playerIDs,
+            '#mini5_' + playerIDs, '#mini10_' + playerIDs, '#mini15_' + playerIDs, '#mini20_' + playerIDs, '#mini25_' + playerIDs
+        ],
+        playerBool: [false, false, false, false, false,
+            false, false, false, false, false,
+            false, false, true, false, false,
+            false, false, false, false, false,
+            false, false, false, false, false
+        ],
+        playerAll: [],
+        playerWin: false,
+        playerNumWins: 0
+    }
+    var user = ich.user(player);
+    var userBoard = ich.userBoard(player);
+    var leaderBoard = ich.leaderBoard(player);
+    genBoard(player.playerBoard, player.playerAll);
+    $("#Opponents").append(user);
+    $("#boards").append(userBoard);
+    $("#leaders").append(leaderBoard);
+    playerArray[playerArray.length] = player;
+    start = true;
+
+}
 /*fills in a board
 takes in a position array*/
 function genBoard(boardArray, alls) {
-    for (i = 0; i < 25; i++) {
+    for (w = 0; w < 25; w++) {
         rand = Math.random();
         num = (Math.round(rand * 14) + 1);
-        if (i < 5) {
+        if (w < 5) {
 
-        } else if (i < 10) {
+        } else if (w < 10) {
             num += 15;
-        } else if (i < 15) {
+        } else if (w < 15) {
             num += 30;
-        } else if (i < 20) {
+        } else if (w < 20) {
             num += 45;
         } else {
             num += 60;
         }
-        for (j = 0; j < i; j++) {
+        for (j = 0; j < w; j++) {
             if (num === alls[j]) {
                 j = 0;
                 rand = Math.random();
                 num = (Math.round(rand * 14) + 1);
-                if (i < 5) {} else if (i < 10) {
+                if (w < 5) {} else if (w < 10) {
                     num += 15;
-                } else if (i < 15) {
+                } else if (w < 15) {
                     num += 30;
-                } else if (i < 20) {
+                } else if (w < 20) {
                     num += 45;
                 } else {
                     num += 60;
                 }
             }
         }
-        alls[i] = num;
+        alls[w] = num;
     }
-    for (i = 0; i < alls.length; i++) {
-        if (i != 12) {
-            $(boardArray[i]).html(alls[i]);
+    for (q = 0; q < alls.length; q++) {
+        if (q != 12) {
+            $(boardArray[q]).html(alls[q]);
         }
     }
+
 }
 /*Changes the header to show the guess and places the guess into its proper guessed array
 takes in the guess*/
@@ -105,6 +111,7 @@ function displayHead(num) {
             }
         }
         $('#header').html("B" + num);
+        $('#miniHeader').html("B" + num);
     } else if (num < 31) {
         I1.push(num);
         for (var i = IR.length - 1; i >= 0; i--) {
@@ -113,6 +120,7 @@ function displayHead(num) {
             }
         }
         $('#header').html("I" + num);
+        $('#miniHeader').html("I" + num);
     } else if (num < 46) {
         N1.push(num);
         for (var i = NR.length - 1; i >= 0; i--) {
@@ -121,6 +129,7 @@ function displayHead(num) {
             }
         }
         $('#header').html("N" + num);
+        $('#miniHeader').html("N" + num);
     } else if (num < 61) {
         G1.push(num);
         for (var i = GR.length - 1; i >= 0; i--) {
@@ -129,6 +138,7 @@ function displayHead(num) {
             }
         }
         $('#header').html("G" + num);
+        $('#miniHeader').html("G" + num);
     } else if (num < 76) {
         O1.push(num);
         for (var i = OR.length - 1; i >= 0; i--) {
@@ -137,8 +147,7 @@ function displayHead(num) {
             }
         }
         $('#header').html("O" + num);
-    } else {
-        console.log("i dont even know...");
+        $('#miniHeader').html("O" + num);
     }
 }
 
@@ -159,103 +168,91 @@ function displayGuess() {
 /*Used to show which numbers have been guessed
 takes in a position array and a corresponding boolean array*/
 function turnRed(array, array2) {
-    for (i = 0; i < array.length; i++)
-        if (array2[i] === true) {
-            $(array[i]).css('background-color', 'red');
+    for (p = 0; p < array.length; p++)
+        if (array2[p] === true) {
+            $(array[p]).css('background-color', 'red');
         }
 }
 /*Used in the reset function to clear background color
 takes in a position array*/
 function turnWhite(whites) {
-    for (i = 0; i < whites.length; i++) {
-        $(whites[i]).css('background-color', 'transparent');
+    for (o = 0; o < whites.length; o++) {
+        $(whites[o]).css('background-color', 'transparent');
     }
 }
 /*Adds a true value to the boolean array if necessary*/
 function toTrue(a, al) {
-    for (i = 0; i < al.length; i++) {
-        if (num === al[i]) {
-            a[i] = true;
-            guess = i;
+    for (x = 0; x < al.length; x++) {
+        if (num === al[x]) {
+            a[x] = true;
         }
     }
 }
 /*checks to see if there is a winning combination
 takes in a  boolean array and a player name*/
-function isWin(winArray, wins) {
+function isWin(winArray, winned) {
     /*All B's*/
     if (winArray[0] === true && winArray[0] === winArray[1] && winArray[0] === winArray[2] && winArray[0] === winArray[3] && winArray[0] === winArray[4]) {
-        win = true;
+        winned = true;
         console.log("All B's" + 1);
     } /*All I's*/
     else if (winArray[5] === true && winArray[5] === winArray[6] && winArray[5] === winArray[7] && winArray[5] === winArray[8] && winArray[5] === winArray[9]) {
-        win = true;
+        winned = true;
         console.log("All I's" + 2);
     } /*All N's*/
     else if (winArray[10] === true && winArray[10] === winArray[11] && winArray[10] === winArray[12] && winArray[10] === winArray[13] && winArray[10] === winArray[14]) {
-        win = true;
+        winned = true;
         console.log("All N's" + 3);
     } /*All G's*/
     else if (winArray[15] === true && winArray[15] === winArray[16] && winArray[15] === winArray[17] && winArray[15] === winArray[18] && winArray[15] === winArray[19]) {
-        win = true;
+        winned = true;
         console.log("All G's" + 4);
     } /*All O's*/
     else if (winArray[20] === true && winArray[20] === winArray[21] && winArray[20] === winArray[22] && winArray[20] === winArray[23] && winArray[20] === winArray[24]) {
-        win = true;
+        winned = true;
         console.log("All O's" + 5);
     } /*All 1's*/
     else if (winArray[0] === true && winArray[0] === winArray[5] && winArray[0] === winArray[10] && winArray[0] === winArray[15] && winArray[0] === winArray[20]) {
-        win = true;
+        winned = true;
         console.log("All 1's" + 6);
     } /*All 2's*/
     else if (winArray[1] === true && winArray[1] === winArray[6] && winArray[1] === winArray[11] && winArray[1] === winArray[16] && winArray[1] === winArray[21]) {
-        win = true;
+        winned = true;
         console.log("All 2's" + 7);
     } /*All 3's*/
     else if (winArray[2] === true && winArray[2] === winArray[7] && winArray[2] === winArray[12] && winArray[2] === winArray[17] && winArray[2] === winArray[22]) {
-        win = true;
+        winned = true;
         console.log("All 3's" + 8);
     } /*All 4's*/
     else if (winArray[3] === true && winArray[3] === winArray[8] && winArray[3] === winArray[13] && winArray[3] === winArray[18] && winArray[3] === winArray[23]) {
-        win = true;
+        winned = true;
         console.log("All 4's" + 9);
     } /*All 5's*/
     else if (winArray[4] === true && winArray[4] === winArray[9] && winArray[4] === winArray[14] && winArray[4] === winArray[19] && winArray[4] === winArray[24]) {
-        win = true;
+        winned = true;
         console.log("All 5's" + 10);
     } /*Top right to bottom left*/
     else if (winArray[0] === true && winArray[0] === winArray[6] && winArray[0] === winArray[12] && winArray[0] === winArray[18] && winArray[0] === winArray[24]) {
-        win = true;
+        winned = true;
         console.log("Tr to Bl" + 11);
     } /*Bottom left to top right*/
     else if (winArray[4] === true && winArray[4] === winArray[8] && winArray[4] === winArray[12] && winArray[4] === winArray[16] && winArray[4] === winArray[20]) {
-        win = true;
+        winned = true;
         console.log("Br to Tl" + 12);
     }
-    if (win === true) {
-        winner = wins;
-    }
+    return winned;
 }
 /*Resets the boards and begins anew*/
 function resetGame() {
-    allBool = [false, false, false, false, false,
-        false, false, false, false, false,
-        false, false, true, false, false,
-        false, false, false, false, false,
-        false, false, false, false, false
-    ];
-    allBool2 = [false, false, false, false, false,
+    playerArray[0].playerBool = [false, false, false, false, false,
         false, false, false, false, false,
         false, false, true, false, false,
         false, false, false, false, false,
         false, false, false, false, false
     ];
     win = false;
-    turnWhite(myBoard);
-    turnWhite(myBoard2);
-    turnWhite(miniArray);
-    turnWhite(miniArray2);
-    $('button').html("next");
+    start = true;
+    winCount = 0;
     guessCount = 0;
     guessList = [];
     B1 = [];
@@ -263,40 +260,73 @@ function resetGame() {
     G1 = [];
     N1 = [];
     O1 = [];
-    all = [];
-    all2 = [];
     winner = 0;
-    $('#mini13').css('background-color', 'red');
-    $('#miniM').css('background-color', 'red');
-    $('#N3').css('background-color', 'red');
-    $('#N8').css('background-color', 'red');
-    $('#header').html("Player 1");
+    $('#header').html("Ready to start a new game");
+    $('#miniHeader').html("Players");
     BR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     IR = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
     NR = [31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
     GR = [46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60];
     OR = [61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75];
-    genBoard(myBoard, all);
-    genBoard(myBoard2, all2);
-    console.log("I should not say this more than once");
-    /*problem, my program does not want to leave the resetGame function once it has entered it*/
+    for (i = 0; i < playerArray.length; i++) {
+        turnWhite(playerArray[i].playerBoard);
+    }
+    for (i = 0; i < playerArray.length; i++) {
+        turnWhite(playerArray[i].playerMini);
+    }
+    for (i = 0; i < playerArray.length; i++) {
+        genBoard(playerArray[i].playerBoard, playerArray[i].playerAll);
+    }
+    for (i = 0; i < playerArray.length; i++) {
+        playerArray[i].playerBool = [false, false, false, false, false,
+            false, false, false, false, false,
+            false, false, true, false, false,
+            false, false, false, false, false,
+            false, false, false, false, false
+        ];
+    }
+    for (i = 0; i < playerArray.length; i++) {
+        playerArray[i].playerAll = [];
+    }
+    for (i = 0; i < playerArray.length; i++) {
+        playerArray[i].playerWin = false;
+    }
+    for (i = 0; i < playerArray.length; i++) {
+        $(playerArray[i].playerMini[12]).css('background-color', 'red');
+        $(playerArray[i].playerBoard[12]).css('background-color', 'red');
+    }
 }
 
 function done() {
-    $('button').html("Again?");
-    $('#header').html(winner + " is the winner");
-    console.log("before the click part");
-    $('button').click(function() {
-        resetGame();
-        console.log("inside the function done()");
-    });
+    if (win === true) {
+        $('button.again').click(function() {
+            if (win === true) {
+                resetGame();
+            }
+            win = false;
+        });
+    }
 }
-$(document).ready(function() {
-    genBoard(myBoard, all);
-    genBoard(myBoard2, all2);
 
-    console.log("HI");
-    $('button').click(function() {
+function displayLeaders(player) {
+    $('#leader_' + player.playerID).html(player.playerName + " has " + player.playerNumWins + " wins");
+    console.log(player.playerID);
+}
+
+$(document).ready(function() {
+
+    $('button.new').click(function() {
+        newPlayer();
+    })
+    console.log(playerArray.length)
+    $('button.next').click(function() {
+        $('button.next').html("Next Draw");
+        if (start === true) {
+            for (i = 0; i < playerArray.length; i++) {
+                genBoard(playerArray[i].playerBoard, playerArray[i].playerAll);
+            }
+        }
+        start = false;
         if (win === false) {
             rand = Math.random();
             num = Math.round(rand * 74) + 1;
@@ -311,19 +341,40 @@ $(document).ready(function() {
             guessCount++;
             displayHead(num);
             displayGuess();
-            toTrue(allBool, all);
-            toTrue(allBool2, all2);
-
-            turnRed(miniArray, allBool);
-            turnRed(myBoard, allBool);
-
-            turnRed(myBoard2, allBool2);
-            turnRed(miniArray2, allBool2);
-            isWin(allBool, "Player 1");
-            if (win === false) {
-                isWin(allBool2, "Player 2");
+            for (i = 0; i < playerArray.length; i++) {
+                toTrue(playerArray[i].playerBool, playerArray[i].playerAll);
             }
-        } else if (win === true) {
+            for (i = 0; i < playerArray.length; i++) {
+                turnRed(playerArray[i].playerMini, playerArray[i].playerBool);
+            }
+            for (i = 0; i < playerArray.length; i++) {
+                turnRed(playerArray[i].playerBoard, playerArray[i].playerBool);
+            }
+            for (i = 0; i < playerArray.length; i++) {
+                var temp = isWin(playerArray[i].playerBool, playerArray[i].playerWin);
+                playerArray[i].playerWin = temp;
+
+            }
+            for (i = 0; i < playerArray.length; i++) {
+                if (playerArray[i].playerWin === true) {
+                    winCount++;
+                    winner = playerArray[i].playerName;
+                    playerArray[i].playerNumWins++;
+                }
+            }
+            for (i = 0; i < playerArray.length; i++) {
+                console.log(playerArray[i].playerName + " has " + playerArray[i].playerNumWins + " wins");
+                displayLeaders(playerArray[i]);
+            }
+            if (winCount > 1) {
+                $('#header').html("We had " + winCount + " winners!!!");
+                win = true;
+            } else if (winCount === 1) {
+                $('#header').html(winner + " is the winner");
+                win = true;
+            }
+        }
+        if (win === true) {
             done();
         }
     });
