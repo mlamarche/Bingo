@@ -107,9 +107,14 @@ button{
 	float:right;
 	height:100%;
 	padding:45px;
+		overflow-x: hidden;
+	overflow-y: auto;
 }
 #leaders{
 	font-size:30px;
+		overflow-x: hidden;
+	overflow-y: auto;
+
 }
 #leaderHead{
 	border:3px solid red;
