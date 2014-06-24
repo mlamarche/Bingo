@@ -22,39 +22,37 @@
 		<div class="container-fluid" id="cont">
 			<div class="row" id = "screen">
 				<div class="col-md-2 " id="Opponent">
-				<div id="miniHeader">
-					Players
+					<div id="miniHeader">
+						Players
 					</div>
 					<div id="Opponents">
-
 					</div>
 				</div>
 				<div class ="col-md-5 col " id="board">
 					<div id="header">
-					Board
+						Board
 					</div>
 					<div id="boards">
-
 					</div>
 				</div>
 				<div class="container-fluid" id="RightSide">
 					<div class="row" id="firsty">
 						<div class = "col-md-2 " id="buttonBar">
-						<h1>BUTTONS!</h1>
+							<h1>BUTTONS!</h1>
 							<div class="row">
-							<div class="col-sm-4 buttonHolder">
-								<button type="button" class="btn btn-lg btn-success next"id='#next'>Begin</button>
-							</div>
-							</div>
-							<div class="row">
-							<div class="col-sm-4 buttonHolder">
-								<button type="button" class="btn btn-lg btn-warning again"id='#reset'>Play again?</button>
-							</div>
+								<div class="col-sm-4 buttonHolder">
+									<button type="button" class="btn btn-lg btn-success next"id='#next'>Begin</button>
+								</div>
 							</div>
 							<div class="row">
-							<div class="col-sm-4 buttonHolder">
-								<button type="button" class="btn btn-lg btn-danger new"id='#new'>New Player</button>
+								<div class="col-sm-4 buttonHolder">
+									<button type="button" class="btn btn-lg btn-warning again"id='#reset'>Play again?</button>
+								</div>
 							</div>
+							<div class="row">
+								<div class="col-sm-4 buttonHolder">
+									<button type="button" class="btn btn-lg btn-danger new"id='#new' data-toggle="modal" data-target="#myModal">New Player</button>
+								</div>
 							</div>
 						</div>
 						<div class = "col-md-3 " id="guessBar">
@@ -86,43 +84,61 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+					</div>
+					<div class="modal-body">
+						<p>I am going to try and have an input bo below this!</p>
+						<input type="text" class="form-control" id="inputtext">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="addbutton">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<script id="user" type="text/html">
 			
 				<h1 class="name">{{ playerName }}</h1>
 				<div class="row">
-					<div class="col-sm-4 miniMe"id ="mini1_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini2_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini3_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini4_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini5_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini1_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini2_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini3_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini4_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini5_{{playerID}}"></div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4 miniMe"id ="mini6_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini7_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini8_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini9_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini10_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini6_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini7_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini8_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini9_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini10_{{playerID}}"></div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4 miniMe"id ="mini11_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini12_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe middle"id ="mini13_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini14_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini15_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini11_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini12_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe middle"id ="mini13_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini14_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini15_{{playerID}}"></div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4 miniMe"id ="mini16_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini17_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini18_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini19_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini20_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini16_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini17_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini18_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini19_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini20_{{playerID}}"></div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4 miniMe"id ="mini21_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini22_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini23_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini24_{{playerID}}"></div>
-					<div class="col-sm-4 miniMe"id ="mini25_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini21_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini22_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini23_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini24_{{playerID}}"></div>
+						<div class="col-sm-4 miniMe"id ="mini25_{{playerID}}"></div>
 				</div>
 			
 		</script>
@@ -130,52 +146,52 @@
 			
 				<h1 class="name">{{ playerName }}</h1>
 				<div class="row">
-					<div class="col-sm-4 square" id="head">B</div>
-					<div class="col-sm-4 square" id="head">I</div>
-					<div class="col-sm-4 square" id="head">N</div>
-					<div class="col-sm-4 square" id="head">G</div>
-					<div class="col-sm-4 square" id="head">O</div>
+						<div class="col-sm-4 square" id="head">B</div>
+						<div class="col-sm-4 square" id="head">I</div>
+						<div class="col-sm-4 square" id="head">N</div>
+						<div class="col-sm-4 square" id="head">G</div>
+						<div class="col-sm-4 square" id="head">O</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4 square" id="B1_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="I1_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="N1_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="G1_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="O1_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="B1_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="I1_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="N1_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="G1_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="O1_{{playerID}}"></div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4 square" id="B2_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="I2_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="N2_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="G2_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="O2_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="B2_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="I2_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="N2_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="G2_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="O2_{{playerID}}"></div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4 square" id="B3_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="I3_{{playerID}}"></div>
-					<div class="col-sm-4 square middle" id="N3_{{playerID}}"><span class="glyphicon glyphicon-star-empty"></span></div>
-					<div class="col-sm-4 square" id="G3_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="O3_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="B3_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="I3_{{playerID}}"></div>
+						<div class="col-sm-4 square middle" id="N3_{{playerID}}"><span class="glyphicon glyphicon-star-empty"></span></div>
+						<div class="col-sm-4 square" id="G3_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="O3_{{playerID}}"></div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4 square" id="B4_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="I4_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="N4_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="G4_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="O4_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="B4_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="I4_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="N4_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="G4_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="O4_{{playerID}}"></div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4 square" id="B5_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="I5_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="N5_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="G5_{{playerID}}"></div>
-					<div class="col-sm-4 square" id="O5_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="B5_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="I5_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="N5_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="G5_{{playerID}}"></div>
+						<div class="col-sm-4 square" id="O5_{{playerID}}"></div>
 				</div>
 			
 		</script>
 		<script id="leaderBoard" type="text/html">
 				<div class="row">
-					<div class="col-sm-4 line" id="leader_{{playerID}}">"{{playerName}}"</div>
+						<div class="col-sm-4 line" id="leader_{{playerID}}">"{{playerName}}"</div>
 				</div>
 		</script>
 	</body>

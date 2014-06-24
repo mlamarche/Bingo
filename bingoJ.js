@@ -6,6 +6,7 @@ var winner = 0;
 var winCount = 0;
 var playerArray = [];
 var leaders = [];
+var text = 0;
 var B1 = [];
 var I1 = [];
 var G1 = [];
@@ -17,11 +18,52 @@ var NR = [31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
 var GR = [46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60];
 var OR = [61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75];
 var guessList = [];
-var guessCount = 0;
+var guessCount = "";
+
+function createGuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0,
+            v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
+function getName() {
+    text = "";
+    $('#inputtext').val('');
+    $("#inputtext").val("").focus();
+
+    $('#addbutton').on("click", function() {
+
+        text = $('#inputtext').val();
+
+        console.log(text);
+        if (text != "") {
+            newPlayer();
+        }
+        $('#inputtext').val('');
+    })
+    $('#inputtext').on("keydown", function(e) {
+        if (e.keyCode === 13) {
+            text = $('#inputtext').val();
+
+            console.log(text);
+            if (text != "") {
+                newPlayer();
+            }
+            $('#inputtext').val('');
+            $('#myModal').modal('hide');
+        }
+    })
+
+}
 
 function newPlayer() {
-    var newName = prompt("What is your player name?");
-    var playerIDs = playerArray.length;
+    //var newName = prompt("What is your player name?");
+    var newName = text;
+    text = 0;
+    var playerIDs = createGuid();
+    // console.log(newName);
     var player = {
         playerName: newName,
         playerID: playerIDs,
@@ -47,6 +89,7 @@ function newPlayer() {
         playerWin: false,
         playerNumWins: 0
     }
+
     var user = ich.user(player);
     var userBoard = ich.userBoard(player);
     var leaderBoard = ich.leaderBoard(player);
@@ -56,7 +99,6 @@ function newPlayer() {
     $("#leaders").append(leaderBoard);
     playerArray[playerArray.length] = player;
     start = true;
-
 }
 /*fills in a board
 takes in a position array*/
@@ -316,7 +358,10 @@ function displayLeaders(player) {
 $(document).ready(function() {
 
     $('button.new').click(function() {
-        newPlayer();
+        $("#inputtext").val("").focus();
+        $("#inputtext").focus();
+
+        getName();
     })
     console.log(playerArray.length)
     $('button.next').click(function() {
