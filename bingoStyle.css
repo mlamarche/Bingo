@@ -24,7 +24,6 @@ html{
 }
 #guessBar{
 	right:0;
-	border-left: 1px solid #eee;
 	border-radius: 10px;
 	padding:10px;
 	height:100%;

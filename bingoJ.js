@@ -39,7 +39,6 @@ function getName() {
 
         text = $('#inputtext').val();
 
-        console.log(text);
         if (text != "") {
             newPlayer();
         }
@@ -49,7 +48,6 @@ function getName() {
         if (e.keyCode === 13) {
             text = $('#inputtext').val();
 
-            console.log(text);
             if (text != "") {
                 newPlayer();
             }
@@ -61,11 +59,9 @@ function getName() {
 }
 
 function newPlayer() {
-    //var newName = prompt("What is your player name?");
     var newName = text;
     text = 0;
     var playerIDs = createGuid();
-    // console.log(newName);
     var player = {
         playerName: newName,
         playerID: playerIDs,
@@ -105,6 +101,9 @@ function newPlayer() {
     $("#leaders").append(leaderBoard);
     playerArray[playerArray.length] = player;
     start = true;
+    setLine(playerArray[0].playerLine);
+    setFont(playerArray[0].playerFont);
+    setShade(playerArray[0].playerShade);
 }
 /*fills in a board
 takes in a position array*/
@@ -215,19 +214,107 @@ function displayGuess() {
 }
 /*Used to show which numbers have been guessed
 takes in a position array and a corresponding boolean array*/
-function setBackground() {
-
+function setBackground(col) {
+    $('body').css('background-color', col);
 }
 
-function setLine() {
-
+function setLine(colo) {
+    $('#Opponent').css('border', '3px solid ' + colo);
+    $('#guessBar').css('border', '3px solid ' + colo);
+    $('#header').css('border', '3px solid ' + colo);
+    $('#miniHeader').css('border', '3px solid ' + colo);
+    $('#head').css('border', '5px solid ' + colo);
+    $('.miniMe').css('border', '1px solid ' + colo);
+    $('.square').css('border', '5px solid ' + colo);
+    $('#leader').css('border', '3px solid ' + colo);
+    $('#leaders').css('border', '3px solid ' + colo);
+    $('#leaderHead').css('border', '3px solid ' + colo);
+    $('#buttonBar').css('border', '3px solid ' + colo);
 }
 
-function setFont() {
-
+function setFont(col) {
+    $('body').css('color', col);
 }
 
-function setShade() {
+function setShade(col) {
+    for (i = 0; i < playerArray.length; i++) {
+        turnColor(playerArray[i].playerMini, playerArray[i].playerBool, playerArray[0].playerShade);
+    }
+    for (i = 0; i < playerArray.length; i++) {
+        turnColor(playerArray[i].playerBoard, playerArray[i].playerBool, playerArray[0].playerShade);
+    }
+}
+
+function letterToColor(letter) {
+    var col = 0;
+    if (letter === "a") {
+        col = "red";
+    } else if (letter === "b") {
+        col = "green";
+    } else if (letter === "c") {
+        col = "blue";
+    } else if (letter === "d") {
+        col = "white";
+    } else if (letter === "e") {
+        col = "black";
+    } else if (letter === "f") {
+        col = "yellow";
+    } else if (letter === "g") {
+        col = "gray";
+    } else if (letter === "h") {
+        col = "purple";
+    } else if (letter === "i") {
+        col = "orange";
+    } else if (letter === "j") {
+        col = "pink";
+    } else if (letter === "k") {
+        col = "gold";
+    } else if (letter === "l") {
+        col = "violet";
+    }
+    return col;
+}
+
+function customize() {
+    var col1 = 0;
+    var col2 = 0;
+    var col3 = 0;
+    var col4 = 0;
+    $('.back').click(function() {
+        var let = $(this).html();
+        col1 = letterToColor(let);
+    })
+    $('.line').click(function() {
+        var let = $(this).html();
+        col2 = letterToColor(let);
+    })
+    $('.font').click(function() {
+        var let = $(this).html();
+        col3 = letterToColor(let);
+    })
+    $('.shade').click(function() {
+        var let = $(this).html();
+        col4 = letterToColor(let);
+    })
+    $('#savebutton').click(function() {
+        if (col1 != playerArray[0].playerBody) {
+            setBackground(col1);
+            playerArray[0].playerBody = col1;
+        }
+        if (col2 != playerArray[0].playerBody) {
+            setLine(col2);
+            playerArray[0].playerLine = col2;
+        }
+        if (col3 != playerArray[0].playerBody) {
+            setFont(col3);
+            playerArray[0].playerFont = col3;
+        }
+        if (col4 != playerArray[0].playerBody) {
+            setShade(col4);
+            playerArray[0].playerShade = col4;
+        }
+
+    })
 
 }
 
@@ -258,51 +345,39 @@ function isWin(winArray, winned) {
     /*All B's*/
     if (winArray[0] === true && winArray[0] === winArray[1] && winArray[0] === winArray[2] && winArray[0] === winArray[3] && winArray[0] === winArray[4]) {
         winned = true;
-        console.log("All B's" + 1);
     } /*All I's*/
     else if (winArray[5] === true && winArray[5] === winArray[6] && winArray[5] === winArray[7] && winArray[5] === winArray[8] && winArray[5] === winArray[9]) {
         winned = true;
-        console.log("All I's" + 2);
     } /*All N's*/
     else if (winArray[10] === true && winArray[10] === winArray[11] && winArray[10] === winArray[12] && winArray[10] === winArray[13] && winArray[10] === winArray[14]) {
         winned = true;
-        console.log("All N's" + 3);
     } /*All G's*/
     else if (winArray[15] === true && winArray[15] === winArray[16] && winArray[15] === winArray[17] && winArray[15] === winArray[18] && winArray[15] === winArray[19]) {
         winned = true;
-        console.log("All G's" + 4);
     } /*All O's*/
     else if (winArray[20] === true && winArray[20] === winArray[21] && winArray[20] === winArray[22] && winArray[20] === winArray[23] && winArray[20] === winArray[24]) {
         winned = true;
-        console.log("All O's" + 5);
     } /*All 1's*/
     else if (winArray[0] === true && winArray[0] === winArray[5] && winArray[0] === winArray[10] && winArray[0] === winArray[15] && winArray[0] === winArray[20]) {
         winned = true;
-        console.log("All 1's" + 6);
     } /*All 2's*/
     else if (winArray[1] === true && winArray[1] === winArray[6] && winArray[1] === winArray[11] && winArray[1] === winArray[16] && winArray[1] === winArray[21]) {
         winned = true;
-        console.log("All 2's" + 7);
     } /*All 3's*/
     else if (winArray[2] === true && winArray[2] === winArray[7] && winArray[2] === winArray[12] && winArray[2] === winArray[17] && winArray[2] === winArray[22]) {
         winned = true;
-        console.log("All 3's" + 8);
     } /*All 4's*/
     else if (winArray[3] === true && winArray[3] === winArray[8] && winArray[3] === winArray[13] && winArray[3] === winArray[18] && winArray[3] === winArray[23]) {
         winned = true;
-        console.log("All 4's" + 9);
     } /*All 5's*/
     else if (winArray[4] === true && winArray[4] === winArray[9] && winArray[4] === winArray[14] && winArray[4] === winArray[19] && winArray[4] === winArray[24]) {
         winned = true;
-        console.log("All 5's" + 10);
     } /*Top right to bottom left*/
     else if (winArray[0] === true && winArray[0] === winArray[6] && winArray[0] === winArray[12] && winArray[0] === winArray[18] && winArray[0] === winArray[24]) {
         winned = true;
-        console.log("Tr to Bl" + 11);
     } /*Bottom left to top right*/
     else if (winArray[4] === true && winArray[4] === winArray[8] && winArray[4] === winArray[12] && winArray[4] === winArray[16] && winArray[4] === winArray[20]) {
         winned = true;
-        console.log("Br to Tl" + 12);
     }
     return winned;
 }
@@ -357,8 +432,8 @@ function resetGame() {
         playerArray[i].playerWin = false;
     }
     for (i = 0; i < playerArray.length; i++) {
-        $(playerArray[i].playerMini[12]).css('background-color', 'red');
-        $(playerArray[i].playerBoard[12]).css('background-color', 'red');
+        $(playerArray[i].playerMini[12]).css('background-color', playerArray[0].playerShade);
+        $(playerArray[i].playerBoard[12]).css('background-color', playerArray[0].playerShade);
     }
 }
 
@@ -375,17 +450,16 @@ function done() {
 
 function displayLeaders(player) {
     $('#leader_' + player.playerID).html(player.playerName + " has " + player.playerNumWins + " wins");
-    console.log(player.playerID);
 }
 
 $(document).ready(function() {
-
+    getName();
     $('button.new').click(function() {
-
-
         getName();
     })
-    console.log(playerArray.length)
+    $('button.custom').click(function() {
+        customize();
+    })
     $('button.next').click(function() {
         $('button.next').html("Next Draw");
         if (start === true) {
@@ -412,10 +486,10 @@ $(document).ready(function() {
                 toTrue(playerArray[i].playerBool, playerArray[i].playerAll);
             }
             for (i = 0; i < playerArray.length; i++) {
-                turnColor(playerArray[i].playerMini, playerArray[i].playerBool, playerArray[i].playerShade);
+                turnColor(playerArray[i].playerMini, playerArray[i].playerBool, playerArray[0].playerShade);
             }
             for (i = 0; i < playerArray.length; i++) {
-                turnColor(playerArray[i].playerBoard, playerArray[i].playerBool, playerArray[i].playerShade);
+                turnColor(playerArray[i].playerBoard, playerArray[i].playerBool, playerArray[0].playerShade);
             }
             for (i = 0; i < playerArray.length; i++) {
                 var temp = isWin(playerArray[i].playerBool, playerArray[i].playerWin);
@@ -430,7 +504,6 @@ $(document).ready(function() {
                 }
             }
             for (i = 0; i < playerArray.length; i++) {
-                console.log(playerArray[i].playerName + " has " + playerArray[i].playerNumWins + " wins");
                 displayLeaders(playerArray[i]);
             }
             if (winCount > 1) {
@@ -445,5 +518,4 @@ $(document).ready(function() {
             done();
         }
     });
-    /*problem for tomorrow, I still enter the reset function even when the variable should not allow me to*/
 });
