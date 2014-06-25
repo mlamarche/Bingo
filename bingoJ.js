@@ -22,7 +22,7 @@ var guessList = [];
 var guessCount = "";
 var beginning = false;
 var gameStatus = true;
-
+/*Creates a random ID to assign to each player*/
 function createGuid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0,
@@ -30,7 +30,7 @@ function createGuid() {
         return v.toString(16);
     });
 }
-
+/*Saves color preferences to local memory*/
 function colorSave() {
     // save data to local storage
     var colorScheme = {
@@ -41,7 +41,7 @@ function colorSave() {
     }
     localStorage.setItem("colorScheme", JSON.stringify(colorScheme));
 }
-
+/*Loads color preferences from local memory*/
 function colorLoad() {
     // load data from local storage
     var colorScheme = localStorage.getItem("colorScheme");
@@ -55,7 +55,7 @@ function colorLoad() {
     setFont(playerArray[0].playerFont);
     setShade(playerArray[0].playerShade);
 }
-
+/*Takes text from the modal and turns it into the new players name*/
 function getName() {
     text = "";
     $('#inputtext').val('');
@@ -82,9 +82,8 @@ function getName() {
             $('#myModal').modal('hide');
         }
     })
-
 }
-
+/*Creates the new player and sets his color preferences*/
 function newPlayer() {
     var newName = text;
     text = 0;
@@ -227,7 +226,7 @@ function displayHead(num) {
         $('#miniHeader').html("O" + num);
     }
 }
-
+/*Used to display the guess to the headers*/
 function displayGuess() {
     $('#B').html("B " + B1.sort(function(a, b) {
         return a - b
@@ -247,7 +246,7 @@ takes in a position array and a corresponding boolean array*/
 function setBackground(col) {
     $('body').css('background-color', col);
 }
-
+/*Sets the line color to line preferences*/
 function setLine(colo) {
     $('#Opponent').css('border', '3px solid ' + colo);
     $('#guessBar').css('border', '3px solid ' + colo);
@@ -261,11 +260,11 @@ function setLine(colo) {
     $('#leaderHead').css('border', '3px solid ' + colo);
     $('#buttonBar').css('border', '3px solid ' + colo);
 }
-
+/*Sets the font color to font preferences*/
 function setFont(col) {
     $('body').css('color', col);
 }
-
+/*Sets the players shade preference to the screen*/
 function setShade(col) {
     for (i = 0; i < playerArray.length; i++) {
         turnColor(playerArray[i].playerMini, playerArray[i].playerBool, playerArray[0].playerShade);
@@ -274,7 +273,7 @@ function setShade(col) {
         turnColor(playerArray[i].playerBoard, playerArray[i].playerBool, playerArray[0].playerShade);
     } //Maybe get setShade to reshade all preshade colors
 }
-
+/*Just a helper function that  takes the hidden letter in the modal display and turns that letter into a color*/
 function letterToColor(letter) {
     var col = 0;
     if (letter === "a") {
@@ -304,7 +303,7 @@ function letterToColor(letter) {
     }
     return col;
 }
-
+/*Toggles between game modes*/
 function gameMode() {
     if (start === true) {
         $('#regButt').click(function() {
@@ -319,7 +318,7 @@ function gameMode() {
         })
     }
 }
-
+/*This function calls the individual customizing functions for things like body, line, font and shade*/
 function customize() {
     var col1 = playerArray[0].playerBody;
     var col2 = playerArray[0].playerLine;
@@ -363,7 +362,7 @@ function customize() {
         colorSave();
     })
 }
-
+/*Changes the shade to match the users preferences*/
 function turnColor(array, array2, color) {
     for (p = 0; p < array.length; p++)
         if (array2[p] === true) {
@@ -385,7 +384,7 @@ function toTrue(a, al) {
         }
     }
 }
-
+/*a bunch of code that would be repeated in both the blackout and regular versions of the game. Just saving some lines*/
 function beginOfCode() {
 
     rand = Math.random();
@@ -453,7 +452,7 @@ function isWin(winArray, winned) {
     }
     return winned;
 }
-
+/*checks to see if Blackout conditions are met*/
 function isBlackoutWin(winArray, winned) {
     winned = true;
     for (var zx = 0; zx < winArray.length; zx++) {
@@ -519,7 +518,7 @@ function resetGame() {
         $(playerArray[i].playerBoard[12]).css('background-color', playerArray[0].playerShade);
     }
 }
-
+/*A function that does not allow the play again button to be pressed unless the game is over*/
 function done() {
     if (win === true) {
         $('button.again').click(function() {
@@ -532,15 +531,17 @@ function done() {
         });
     }
 }
-
+/*Display's the leaders and their amount of wins*/
 function displayLeaders(player) {
     $('#leader_' + player.playerID).html(player.playerName + " has " + player.playerNumWins + " wins");
 }
+/*Runs this immediately as a convenience*/
 $(window).load(function() {
     $('#myModal').modal('show');
     getName();
     beginning = true;
 });
+/*This is bsically the main function. Contains what happens when the buttons are clicked*/
 $(document).ready(function() {
     $('button.new').click(function() {
         getName();
