@@ -31,7 +31,9 @@ function createGuid() {
 function getName() {
     text = "";
     $('#inputtext').val('');
-    $("#inputtext").val("").focus();
+    $('#myModal').on('shown.bs.modal', function() {
+        $('#inputtext').focus();
+    })
 
     $('#addbutton').on("click", function() {
 
@@ -87,7 +89,11 @@ function newPlayer() {
         ],
         playerAll: [],
         playerWin: false,
-        playerNumWins: 0
+        playerNumWins: 0,
+        playerBody: "white",
+        playerLine: "black",
+        playerFont: "gray",
+        playerShade: "red"
     }
 
     var user = ich.user(player);
@@ -209,10 +215,26 @@ function displayGuess() {
 }
 /*Used to show which numbers have been guessed
 takes in a position array and a corresponding boolean array*/
-function turnRed(array, array2) {
+function setBackground() {
+
+}
+
+function setLine() {
+
+}
+
+function setFont() {
+
+}
+
+function setShade() {
+
+}
+
+function turnColor(array, array2, color) {
     for (p = 0; p < array.length; p++)
         if (array2[p] === true) {
-            $(array[p]).css('background-color', 'red');
+            $(array[p]).css('background-color', color);
         }
 }
 /*Used in the reset function to clear background color
@@ -305,6 +327,7 @@ function resetGame() {
     winner = 0;
     $('#header').html("Ready to start again");
     $('#miniHeader').html("Players");
+    $('.middle').css('background-color', playerArray[0].playerShade)
     BR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     IR = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
     NR = [31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
@@ -358,8 +381,7 @@ function displayLeaders(player) {
 $(document).ready(function() {
 
     $('button.new').click(function() {
-        $("#inputtext").val("").focus();
-        $("#inputtext").focus();
+
 
         getName();
     })
@@ -390,10 +412,10 @@ $(document).ready(function() {
                 toTrue(playerArray[i].playerBool, playerArray[i].playerAll);
             }
             for (i = 0; i < playerArray.length; i++) {
-                turnRed(playerArray[i].playerMini, playerArray[i].playerBool);
+                turnColor(playerArray[i].playerMini, playerArray[i].playerBool, playerArray[i].playerShade);
             }
             for (i = 0; i < playerArray.length; i++) {
-                turnRed(playerArray[i].playerBoard, playerArray[i].playerBool);
+                turnColor(playerArray[i].playerBoard, playerArray[i].playerBool, playerArray[i].playerShade);
             }
             for (i = 0; i < playerArray.length; i++) {
                 var temp = isWin(playerArray[i].playerBool, playerArray[i].playerWin);
