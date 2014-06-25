@@ -149,6 +149,7 @@ button{
 	color:white;
 	height:100%;
 	width:100%;
+	min-height: 300px;
 }
 #tiny{
 	height:1%;
@@ -227,4 +228,14 @@ button{
 #customs{
 	height:100%;
 	width:100%;
+}
+#regButt{
+	height:100px;
+	width:150px;
+	margin-left:16%;
+}
+#blackButt{
+	height:100px;
+	width:150px;
+	margin-left: 16%;
 }

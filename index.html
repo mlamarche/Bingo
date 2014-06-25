@@ -59,6 +59,11 @@
 									<button type="button" class="btn btn-lg btn-primary custom"id='#custom' data-toggle="modal" data-target="#myCustom">Customize</button>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col-sm-4 buttonHolder">
+									<button type="button" class="btn btn-lg btn-default mode"id='#mode' data-toggle="modal" data-target="#toPlay">Game Mode</button>
+								</div>
+							</div>
 						</div>
 						<div class = "col-md-3 " id="guessBar">
 							<h1><strong>Guesses Remaining</strong></h1>
@@ -207,6 +212,17 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal" id="savebutton">Save Colors</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="toPlay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<p><strong>Would you like to play regular or blackout?</strong></p>
+						<button type="button" class="btn btn-lg btn-default" data-dismiss="modal" id="regButt">Regular</button>
+						<button type="button" class="btn btn-lg btn-danger" data-dismiss="modal" id="blackButt">Blackout</button>
 					</div>
 				</div>
 			</div>

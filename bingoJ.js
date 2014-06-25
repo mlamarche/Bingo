@@ -3,6 +3,7 @@ var start = true;
 var rand = 0;
 var num = 0;
 var winner = 0;
+var winnerArray = [];
 var winCount = 0;
 var playerArray = [];
 var leaders = [];
@@ -20,6 +21,7 @@ var OR = [61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75];
 var guessList = [];
 var guessCount = "";
 var beginning = false;
+var gameStatus = true;
 
 function createGuid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -80,6 +82,7 @@ function getName() {
             $('#myModal').modal('hide');
         }
     })
+
 }
 
 function newPlayer() {
@@ -302,6 +305,21 @@ function letterToColor(letter) {
     return col;
 }
 
+function gameMode() {
+    if (start === true) {
+        $('#regButt').click(function() {
+            if (start === true) {
+                gameStatus = true;
+            }
+        })
+        $('#blackButt').click(function() {
+            if (start === true) {
+                gameStatus = false;
+            }
+        })
+    }
+}
+
 function customize() {
     var col1 = playerArray[0].playerBody;
     var col2 = playerArray[0].playerLine;
@@ -367,6 +385,32 @@ function toTrue(a, al) {
         }
     }
 }
+
+function beginOfCode() {
+
+    rand = Math.random();
+    num = Math.round(rand * 74) + 1;
+    for (i = 0; i < guessList.length; i++) {
+        if (num === guessList[i]) {
+            rand = Math.random();
+            num = Math.round(rand * 74) + 1;
+            i = 0;
+        }
+    }
+    guessList[guessCount] = num;
+    guessCount++;
+    displayHead(num);
+    displayGuess();
+    for (i = 0; i < playerArray.length; i++) {
+        toTrue(playerArray[i].playerBool, playerArray[i].playerAll);
+    }
+    for (i = 0; i < playerArray.length; i++) {
+        turnColor(playerArray[i].playerMini, playerArray[i].playerBool, playerArray[0].playerShade);
+    }
+    for (i = 0; i < playerArray.length; i++) {
+        turnColor(playerArray[i].playerBoard, playerArray[i].playerBool, playerArray[0].playerShade);
+    }
+}
 /*checks to see if there is a winning combination
 takes in a  boolean array and a player name*/
 function isWin(winArray, winned) {
@@ -409,6 +453,16 @@ function isWin(winArray, winned) {
     }
     return winned;
 }
+
+function isBlackoutWin(winArray, winned) {
+    winned = true;
+    for (var zx = 0; zx < winArray.length; zx++) {
+        if (winArray[zx] === false) {
+            winned = false;
+        }
+    }
+    return winned;
+}
 /*Resets the boards and begins anew*/
 function resetGame() {
     playerArray[0].playerBool = [false, false, false, false, false,
@@ -420,6 +474,7 @@ function resetGame() {
     win = false;
     start = true;
     winCount = 0;
+    winnerArray = [];
     guessCount = 0;
     guessList = [];
     B1 = [];
@@ -470,6 +525,8 @@ function done() {
         $('button.again').click(function() {
             if (win === true) {
                 resetGame();
+                $('#toPlay').modal('show');
+                gameMode();
             }
             win = false;
         });
@@ -491,62 +548,88 @@ $(document).ready(function() {
     $('button.custom').click(function() {
         customize();
     })
+    if (start === true) {
+        $('button.mode').click(function() {
+            if (start === true) {
+                gameMode();
+            }
+        })
+    }
     $('button.next').click(function() {
-        $('button.next').html("Next Draw");
-        if (start === true) {
-            for (i = 0; i < playerArray.length; i++) {
-                genBoard(playerArray[i].playerBoard, playerArray[i].playerAll);
-            }
-        }
-        start = false;
-        if (win === false) {
-            rand = Math.random();
-            num = Math.round(rand * 74) + 1;
-            for (i = 0; i < guessList.length; i++) {
-                if (num === guessList[i]) {
-                    rand = Math.random();
-                    num = Math.round(rand * 74) + 1;
-                    i = 0;
+        if (gameStatus === true) {
+            $('button.next').html("Next Draw");
+            if (start === true) {
+                for (i = 0; i < playerArray.length; i++) {
+                    genBoard(playerArray[i].playerBoard, playerArray[i].playerAll);
                 }
             }
-            guessList[guessCount] = num;
-            guessCount++;
-            displayHead(num);
-            displayGuess();
-            for (i = 0; i < playerArray.length; i++) {
-                toTrue(playerArray[i].playerBool, playerArray[i].playerAll);
-            }
-            for (i = 0; i < playerArray.length; i++) {
-                turnColor(playerArray[i].playerMini, playerArray[i].playerBool, playerArray[0].playerShade);
-            }
-            for (i = 0; i < playerArray.length; i++) {
-                turnColor(playerArray[i].playerBoard, playerArray[i].playerBool, playerArray[0].playerShade);
-            }
-            for (i = 0; i < playerArray.length; i++) {
-                var temp = isWin(playerArray[i].playerBool, playerArray[i].playerWin);
-                playerArray[i].playerWin = temp;
+            start = false;
+            if (win === false) {
+                beginOfCode();
+                for (i = 0; i < playerArray.length; i++) {
+                    var temp = isWin(playerArray[i].playerBool, playerArray[i].playerWin);
+                    playerArray[i].playerWin = temp;
 
-            }
-            for (i = 0; i < playerArray.length; i++) {
-                if (playerArray[i].playerWin === true) {
-                    winCount++;
-                    winner = playerArray[i].playerName;
-                    playerArray[i].playerNumWins++;
+                }
+                for (i = 0; i < playerArray.length; i++) {
+                    if (playerArray[i].playerWin === true) {
+                        winCount++;
+                        winner = playerArray[i].playerName;
+                        playerArray[i].playerNumWins++;
+                    }
+                }
+                for (i = 0; i < playerArray.length; i++) {
+                    displayLeaders(playerArray[i]);
+                }
+                if (winCount > 1) {
+                    $('#header').html("We had " + winCount + " winners!!!");
+                    win = true;
+                } else if (winCount === 1) {
+                    $('#header').html(winner + " is the winner");
+                    win = true;
                 }
             }
-            for (i = 0; i < playerArray.length; i++) {
-                displayLeaders(playerArray[i]);
+            if (win === true) {
+                done();
             }
-            if (winCount > 1) {
-                $('#header').html("We had " + winCount + " winners!!!");
-                win = true;
-            } else if (winCount === 1) {
-                $('#header').html(winner + " is the winner");
-                win = true;
+        } else if (gameStatus === false) {
+            $('button.next').html("Next Draw");
+            if (start === true) {
+                for (i = 0; i < playerArray.length; i++) {
+                    genBoard(playerArray[i].playerBoard, playerArray[i].playerAll);
+                }
             }
-        }
-        if (win === true) {
-            done();
+            start = false;
+            if (win === false) {
+                beginOfCode();
+
+                for (i = 0; i < playerArray.length; i++) {
+                    var temp = isBlackoutWin(playerArray[i].playerBool, playerArray[i].playerWin);
+                    playerArray[i].playerWin = temp;
+
+                }
+                for (i = 0; i < playerArray.length; i++) {
+                    if (playerArray[i].playerWin === true) {
+                        winCount++;
+                        winner = playerArray[i].playerName;
+                        winnerArray.push(playerArray[i].playerName);
+                        playerArray[i].playerNumWins++;
+                    }
+                }
+                for (i = 0; i < playerArray.length; i++) {
+                    displayLeaders(playerArray[i]);
+                }
+                if (winCount > 1) {
+                    $('#header').html(winnerArray + " won!");
+                    win = true;
+                } else if (winCount === 1) {
+                    $('#header').html(winner + " is the winner");
+                    win = true;
+                }
+            }
+            if (win === true) {
+                done();
+            }
         }
     });
 });
