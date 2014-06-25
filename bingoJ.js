@@ -34,7 +34,6 @@ function getName() {
     $('#myModal').on('shown.bs.modal', function() {
         $('#inputtext').focus();
     })
-
     $('#addbutton').on("click", function() {
 
         text = $('#inputtext').val();
@@ -55,7 +54,6 @@ function getName() {
             $('#myModal').modal('hide');
         }
     })
-
 }
 
 function newPlayer() {
@@ -91,7 +89,6 @@ function newPlayer() {
         playerFont: "gray",
         playerShade: "red"
     }
-
     var user = ich.user(player);
     var userBoard = ich.userBoard(player);
     var leaderBoard = ich.leaderBoard(player);
@@ -145,7 +142,6 @@ function genBoard(boardArray, alls) {
             $(boardArray[q]).html(alls[q]);
         }
     }
-
 }
 /*Changes the header to show the guess and places the guess into its proper guessed array
 takes in the guess*/
@@ -315,7 +311,6 @@ function customize() {
         }
 
     })
-
 }
 
 function turnColor(array, array2, color) {
@@ -451,9 +446,11 @@ function done() {
 function displayLeaders(player) {
     $('#leader_' + player.playerID).html(player.playerName + " has " + player.playerNumWins + " wins");
 }
-
-$(document).ready(function() {
+$(window).load(function() {
+    $('#myModal').modal('show');
     getName();
+});
+$(document).ready(function() {
     $('button.new').click(function() {
         getName();
     })
