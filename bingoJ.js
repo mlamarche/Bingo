@@ -19,6 +19,7 @@ var GR = [46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60];
 var OR = [61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75];
 var guessList = [];
 var guessCount = "";
+var beginning = false;
 
 function createGuid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -26,6 +27,31 @@ function createGuid() {
             v = c === 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
+}
+
+function colorSave() {
+    // save data to local storage
+    var colorScheme = {
+        'back': playerArray[0].playerBody,
+        'line': playerArray[0].playerLine,
+        'font': playerArray[0].playerFont,
+        'shade': playerArray[0].playerShade
+    }
+    localStorage.setItem("colorScheme", JSON.stringify(colorScheme));
+}
+
+function colorLoad() {
+    // load data from local storage
+    var colorScheme = localStorage.getItem("colorScheme");
+    colorScheme = JSON.parse(colorScheme);
+    playerArray[0].playerBody = colorScheme.back;
+    playerArray[0].playerLine = colorScheme.line;
+    playerArray[0].playerFont = colorScheme.font;
+    playerArray[0].playerShade = colorScheme.shade;
+    setBackground(playerArray[0].playerBody);
+    setLine(playerArray[0].playerLine);
+    setFont(playerArray[0].playerFont);
+    setShade(playerArray[0].playerShade);
 }
 
 function getName() {
@@ -98,9 +124,14 @@ function newPlayer() {
     $("#leaders").append(leaderBoard);
     playerArray[playerArray.length] = player;
     start = true;
-    setLine(playerArray[0].playerLine);
-    setFont(playerArray[0].playerFont);
-    setShade(playerArray[0].playerShade);
+    if (beginning === true) {
+        colorLoad();
+        beginning = false;
+    } else {
+        setLine(playerArray[0].playerLine);
+        setFont(playerArray[0].playerFont);
+        setShade(playerArray[0].playerShade);
+    }
 }
 /*fills in a board
 takes in a position array*/
@@ -238,7 +269,7 @@ function setShade(col) {
     }
     for (i = 0; i < playerArray.length; i++) {
         turnColor(playerArray[i].playerBoard, playerArray[i].playerBool, playerArray[0].playerShade);
-    }
+    } //Maybe get setShade to reshade all preshade colors
 }
 
 function letterToColor(letter) {
@@ -272,10 +303,10 @@ function letterToColor(letter) {
 }
 
 function customize() {
-    var col1 = 0;
-    var col2 = 0;
-    var col3 = 0;
-    var col4 = 0;
+    var col1 = playerArray[0].playerBody;
+    var col2 = playerArray[0].playerLine;
+    var col3 = playerArray[0].playerFont;
+    var col4 = playerArray[0].playerShade;
     $('.back').click(function() {
         var let = $(this).html();
         col1 = letterToColor(let);
@@ -293,23 +324,25 @@ function customize() {
         col4 = letterToColor(let);
     })
     $('#savebutton').click(function() {
+        var p = true;
         if (col1 != playerArray[0].playerBody) {
             setBackground(col1);
             playerArray[0].playerBody = col1;
         }
-        if (col2 != playerArray[0].playerBody) {
+        if (col2 != playerArray[0].playerLine) {
             setLine(col2);
             playerArray[0].playerLine = col2;
         }
-        if (col3 != playerArray[0].playerBody) {
+        if (col3 != playerArray[0].playerFont) {
             setFont(col3);
             playerArray[0].playerFont = col3;
         }
-        if (col4 != playerArray[0].playerBody) {
+        if (col4 != playerArray[0].playerShade) {
             setShade(col4);
             playerArray[0].playerShade = col4;
         }
 
+        colorSave();
     })
 }
 
@@ -449,6 +482,7 @@ function displayLeaders(player) {
 $(window).load(function() {
     $('#myModal').modal('show');
     getName();
+    beginning = true;
 });
 $(document).ready(function() {
     $('button.new').click(function() {
